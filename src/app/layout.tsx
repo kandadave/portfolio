@@ -60,10 +60,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png?v=3", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png?v=3", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico?v=3", sizes: "any" },
     ],
-    apple: "/favicon.svg",
+    apple: "/apple-touch-icon.png?v=3",
   },
 };
 
@@ -74,6 +76,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+        <link rel="shortcut icon" href="/favicon.ico?v=3" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col font-sans selection:bg-emerald-500/20 selection:text-emerald-700 bg-slate-50 text-slate-900`}
       >
