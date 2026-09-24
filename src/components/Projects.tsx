@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { projectsData } from "@/data/projects";
 import {
   ArrowUpRight,
-  CheckCircle2,
   Terminal,
   Activity,
 } from "lucide-react";
@@ -32,13 +31,13 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wider uppercase mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-mono font-semibold tracking-wider uppercase mb-3 border border-emerald-500/20">
               03 // Featured Projects
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Production Systems & Live Deployments
             </h2>
-            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
+            <p className="mt-3 text-base text-slate-600">
               Directly interactive projects highlighting high-availability RAG architectures, full-stack management platforms, and developer tooling.
             </p>
           </div>
@@ -49,10 +48,10 @@ export default function Projects() {
               <button
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   filter === cat.id
-                    ? "bg-emerald-600 text-white shadow-sm"
-                    : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-white/5"
+                    ? "bg-emerald-600 text-white shadow-xs"
+                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
                 {cat.label}
@@ -71,13 +70,13 @@ export default function Projects() {
                 key={project.id}
                 className={`glass-card rounded-2xl p-6 sm:p-9 transition-all duration-300 relative overflow-hidden ${
                   isFeatured
-                    ? "border-emerald-500/30 dark:border-emerald-500/25 ring-1 ring-emerald-500/20"
-                    : "border-slate-200 dark:border-white/10"
+                    ? "border-emerald-500/40 ring-1 ring-emerald-500/30 shadow-md"
+                    : "border-slate-200"
                 }`}
               >
                 {/* Subtle top indicator if featured */}
                 {isFeatured && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
                 )}
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -88,40 +87,40 @@ export default function Projects() {
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-2.5">
                         {project.badge && (
-                          <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                          <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-500/30">
                             {project.badge}
                           </span>
                         )}
-                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                        <span className="text-xs font-mono text-slate-500 uppercase tracking-wider font-semibold">
                           {project.category.replace("-", " ")}
                         </span>
                       </div>
                       
-                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                         {project.title}
                       </h3>
-                      <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                      <p className="text-sm font-semibold text-emerald-700">
                         {project.subtitle}
                       </p>
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Technical Highlights Bullet List */}
                     <div className="space-y-2 pt-2">
-                      <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                      <div className="text-xs font-mono uppercase tracking-wider text-slate-500 font-bold">
                         Key Architectural Highlights:
                       </div>
                       <ul className="space-y-2">
                         {project.highlights.map((highlight, hIdx) => (
                           <li
                             key={hIdx}
-                            className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300"
+                            className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0" />
                             <span>{highlight}</span>
                           </li>
                         ))}
@@ -133,7 +132,7 @@ export default function Projects() {
                       {project.tags.map((tag, tIdx) => (
                         <span
                           key={tIdx}
-                          className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/5"
+                          className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200"
                         >
                           {tag}
                         </span>
@@ -142,7 +141,7 @@ export default function Projects() {
                   </div>
 
                   {/* Right Column: Key Metrics & Action Links */}
-                  <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-6 lg:pl-4 lg:border-l lg:border-slate-200/60 dark:lg:border-white/5">
+                  <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-6 lg:pl-6 lg:border-l lg:border-slate-200">
                     
                     {/* Metric Chips Grid */}
                     {project.metrics && project.metrics.length > 0 && (
@@ -150,12 +149,12 @@ export default function Projects() {
                         {project.metrics.map((metric, mIdx) => (
                           <div
                             key={mIdx}
-                            className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-white/5"
+                            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 shadow-2xs"
                           >
-                            <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-tight">
+                            <div className="text-[11px] font-mono text-slate-500 uppercase tracking-tight font-semibold">
                               {metric.label}
                             </div>
-                            <div className="text-base font-bold text-slate-900 dark:text-white mt-1">
+                            <div className="text-base font-bold text-slate-900 mt-1">
                               {metric.value}
                             </div>
                           </div>
@@ -170,7 +169,7 @@ export default function Projects() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-emerald-500/25 transition-all"
+                          className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-md shadow-emerald-600/20 hover:shadow-lg transition-all"
                         >
                           <span>Launch Live Demo</span>
                           <ArrowUpRight className="w-4 h-4" />
@@ -182,7 +181,7 @@ export default function Projects() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 font-medium text-xs sm:text-sm transition-all"
+                          className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 hover:border-slate-400 font-semibold text-xs sm:text-sm transition-all shadow-2xs"
                         >
                           <GithubIcon className="w-4 h-4" />
                           <span>View Source / Repository</span>
@@ -191,9 +190,9 @@ export default function Projects() {
                     </div>
 
                     {/* Operational badge */}
-                    <div className="p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 flex items-center gap-2 text-xs text-emerald-700 dark:text-emerald-400">
-                      <Activity className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                      <span className="text-[11px]">Engineered for high availability & low latency</span>
+                    <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-500/20 flex items-center gap-2 text-xs text-emerald-800">
+                      <Activity className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span className="text-[11px] font-medium">Engineered for high availability & low latency</span>
                     </div>
 
                   </div>
@@ -204,13 +203,13 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Data Architecture Note for Developer */}
-        <div className="mt-12 p-4 rounded-xl bg-slate-900/5 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
+        {/* Data Architecture Note */}
+        <div className="mt-12 p-4 rounded-xl bg-white border border-slate-200 flex items-center justify-between text-xs text-slate-600 shadow-2xs">
           <div className="flex items-center gap-2 font-mono text-[11px]">
-            <Terminal className="w-4 h-4 text-emerald-500" />
-            <span>Typed Data Store: <code className="text-emerald-600 dark:text-emerald-400">/src/data/projects.ts</code></span>
+            <Terminal className="w-4 h-4 text-emerald-600" />
+            <span>Typed Data Store: <code className="text-emerald-700 font-semibold">/src/data/projects.ts</code></span>
           </div>
-          <span className="text-[11px] hidden sm:inline">Add new projects anytime without modifying presentation code</span>
+          <span className="text-[11px] hidden sm:inline text-slate-500">Add new projects anytime without modifying presentation code</span>
         </div>
 
       </div>

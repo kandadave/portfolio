@@ -3,30 +3,16 @@
 @layer base {
   :root {
     --bg-page: #f8fafc;
-    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-card: #ffffff;
     --bg-card-subtle: #f1f5f9;
     --border-color: rgba(15, 23, 42, 0.08);
-    --border-hover: rgba(16, 185, 129, 0.4);
+    --border-hover: rgba(5, 150, 105, 0.45);
     --text-primary: #0f172a;
-    --text-secondary: #475569;
+    --text-secondary: #334155;
     --text-muted: #64748b;
     --accent: #059669;
-    --accent-glow: rgba(5, 150, 105, 0.15);
-    --grid-line: rgba(15, 23, 42, 0.04);
-  }
-
-  .dark {
-    --bg-page: #06090e;
-    --bg-card: rgba(13, 20, 34, 0.75);
-    --bg-card-subtle: #0f172a;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(16, 185, 129, 0.5);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent: #10b981;
-    --accent-glow: rgba(16, 185, 129, 0.2);
-    --grid-line: rgba(255, 255, 255, 0.035);
+    --accent-glow: rgba(5, 150, 105, 0.12);
+    --grid-line: rgba(15, 23, 42, 0.045);
   }
 }
 
@@ -39,7 +25,6 @@ body {
   color: var(--text-primary);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Technical Blueprint Grid Background */
@@ -52,21 +37,22 @@ body {
 
 /* Subtle Radial Glow in Hero */
 .hero-radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12), transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.14), transparent 70%);
 }
 
-/* Glassmorphism Card Style */
+/* Crisp Glassmorphism Card Style */
 .glass-card {
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
   border-color: var(--border-hover);
-  box-shadow: 0 10px 30px -10px var(--accent-glow);
+  box-shadow: 0 10px 25px -5px var(--accent-glow), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
 /* Custom Scrollbar */
@@ -75,11 +61,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-page);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.4);
+  background: rgba(100, 116, 139, 0.35);
   border-radius: 4px;
 }
 

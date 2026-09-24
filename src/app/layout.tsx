@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
       "I build production-grade AI agents and full-stack systems that stay online, stay grounded, and stay within budget.",
     images: [
       {
-        url: "/headshot.jpg",
+        url: "/headshot.png",
         width: 800,
         height: 800,
         alt: "David Kanda Chumo - AI Automation Engineer",
@@ -57,7 +56,7 @@ export const metadata: Metadata = {
     title: "David Kanda Chumo | AI Automation Engineer & RAG Systems Architect",
     description:
       "I build production-grade AI agents and full-stack systems that stay online, stay grounded, and stay within budget.",
-    images: ["/headshot.jpg"],
+    images: ["/headshot.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -70,15 +69,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col font-sans selection:bg-emerald-500/20 selection:text-emerald-400`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col font-sans selection:bg-emerald-500/20 selection:text-emerald-700 bg-slate-50 text-slate-900`}
       >
-        <ThemeProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Shield, Zap, RefreshCw, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
+import { Shield, Zap, RefreshCw, BarChart3, CheckCircle2 } from "lucide-react";
 
 export default function About() {
   const pillars = [
@@ -38,10 +37,10 @@ export default function About() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wider uppercase mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-mono font-semibold tracking-wider uppercase mb-3 border border-emerald-500/20">
             01 // Architectural Focus
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Engineering resilient, grounded, and cost-controlled AI systems.
           </h2>
         </div>
@@ -51,23 +50,23 @@ export default function About() {
           
           {/* Main Narrative Card */}
           <div className="lg:col-span-7 glass-card rounded-2xl p-7 sm:p-9 space-y-6">
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-              I am an <strong className="text-slate-900 dark:text-white font-semibold">AI Automation Engineer and Full-Stack Developer</strong> specializing in 
+            <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-medium">
+              I am an <strong className="text-slate-950 font-bold">AI Automation Engineer and Full-Stack Developer</strong> specializing in 
               high-throughput Retrieval-Augmented Generation (RAG) pipelines and LLM-powered enterprise products.
             </p>
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-base text-slate-600 leading-relaxed">
               While many AI applications look impressive in demos, real production workloads frequently collapse under upstream provider outages, 
               uncontrolled API token bills, and subtle hallucinations. I engineer provider-agnostic, resilient architectures that survive upstream 
               rate-limits, remain strictly grounded against hallucinations, and operate with maximum token efficiency.
             </p>
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-              With deep expertise in <strong className="text-slate-900 dark:text-white font-medium">Python, JavaScript, FastAPI, React, Next.js, and PostgreSQL</strong>, 
+            <p className="text-base text-slate-600 leading-relaxed">
+              With deep expertise in <strong className="text-slate-900 font-semibold">Python, JavaScript, FastAPI, React, Next.js, and PostgreSQL</strong>, 
               I design systems from first principles — pairing mathematically sound retrieval techniques with robust full-stack interfaces.
             </p>
 
-            <div className="pt-4 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-600 dark:text-slate-400">
-              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
-                <CheckCircle2 className="w-4 h-4" /> Available for contract & freelance AI engineering
+            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-600">
+              <span className="flex items-center gap-1.5 text-emerald-700 font-bold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Available for contract & freelance AI engineering
               </span>
               <span>•</span>
               <span>Nairobi, Kenya (UTC+3)</span>
@@ -83,16 +82,16 @@ export default function About() {
               return (
                 <div
                   key={idx}
-                  className="glass-card rounded-xl p-5 hover:border-emerald-500/30 transition-all duration-200 flex gap-4"
+                  className="glass-card rounded-xl p-5 hover:border-emerald-500/40 transition-all duration-200 flex gap-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex-shrink-0 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-500/30 flex-shrink-0 flex items-center justify-center text-emerald-700">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-sm font-bold text-slate-900">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
