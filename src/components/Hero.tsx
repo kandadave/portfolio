@@ -142,21 +142,6 @@ export default function Hero() {
                     priority
                     className="object-cover object-top group-hover:scale-103 transition-transform duration-500"
                   />
-                  {/* Subtle Gradient Overlay at Base */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Floating Identity Badge on Photo */}
-                  <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/80 flex items-center justify-between text-xs shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                      <span className="font-mono text-slate-900 text-[11px] font-bold tracking-tight">
-                        RAG Systems Architect
-                      </span>
-                    </div>
-                    <span className="text-emerald-700 font-mono text-[10px] font-bold uppercase tracking-wider">
-                      Verified
-                    </span>
-                  </div>
                 </div>
 
                 {/* Micro Technical Chip Below Photo */}
