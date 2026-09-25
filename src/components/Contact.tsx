@@ -11,11 +11,10 @@ import {
   Clock,
   ExternalLink,
   Sparkles,
-  Layers,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 
-type ProviderId = "gmail" | "outlook" | "yahoo" | "proton" | "zoho" | "client";
+type ProviderId = "gmail" | "outlook" | "yahoo" | "proton" | "zoho";
 
 interface EmailProvider {
   id: ProviderId;
@@ -67,14 +66,6 @@ const PROVIDERS: EmailProvider[] = [
     badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
     description: "Opens compose in Zoho Webmail in a new tab.",
   },
-  {
-    id: "client",
-    name: "Default Mail App",
-    badge: "System App",
-    activeColor: "bg-slate-800 text-white border-slate-800 shadow-xs",
-    badgeBg: "bg-slate-100 text-slate-700 border-slate-300",
-    description: "Opens your local installed mail application (Apple Mail, Thunderbird, etc.).",
-  },
 ];
 
 export default function Contact() {
@@ -85,7 +76,6 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-  const [selectedProvider, setSelectedProvider] = useState<ProviderId | null>(null);
   const [status, setStatus] = useState<{
     message: string;
     url?: string;
@@ -100,10 +90,8 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // Smart detect email provider from user's typed email unless manually selected
+  // Smart detect email provider from user's typed email
   const activeProviderId: ProviderId = useMemo(() => {
-    if (selectedProvider) return selectedProvider;
-
     const lower = formState.email.toLowerCase().trim();
     if (lower.includes("@gmail.com") || lower.includes("@googlemail.com")) {
       return "gmail";
@@ -116,18 +104,28 @@ export default function Contact() {
     ) {
       return "outlook";
     }
-    if (lower.includes("@yahoo.com") || lower.includes("@ymail.com")) {
+    if (
+      lower.includes("@yahoo.com") ||
+      lower.includes("@ymail.com") ||
+      lower.includes("@myyahoo.com") ||
+      lower.includes("@rocketmail.com") ||
+      lower.includes("@aol.com")
+    ) {
       return "yahoo";
     }
-    if (lower.includes("@proton.me") || lower.includes("@protonmail.com")) {
+    if (
+      lower.includes("@proton.me") ||
+      lower.includes("@protonmail.com") ||
+      lower.includes("@pm.me")
+    ) {
       return "proton";
     }
-    if (lower.includes("@zoho.com")) {
+    if (lower.includes("@zoho.com") || lower.includes("@zohomail.com")) {
       return "zoho";
     }
     // Default fallback provider
     return "gmail";
-  }, [formState.email, selectedProvider]);
+  }, [formState.email]);
 
   const currentProvider = useMemo(
     () => PROVIDERS.find((p) => p.id === activeProviderId) || PROVIDERS[0],
@@ -153,9 +151,8 @@ export default function Contact() {
         return `https://mail.proton.me/u/0/compose?to=${recipientEmail}&subject=${encSub}&body=${encBody}`;
       case "zoho":
         return `https://mail.zoho.com/zm/#compose?to=${recipientEmail}&subject=${encSub}&body=${encBody}`;
-      case "client":
       default:
-        return `mailto:${recipientEmail}?subject=${encSub}&body=${encBody}`;
+        return `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${encSub}&body=${encBody}`;
     }
   };
 
@@ -163,28 +160,21 @@ export default function Contact() {
     e.preventDefault();
     const url = getComposeUrl(activeProviderId);
 
-    if (activeProviderId === "client") {
-      window.location.href = url;
+    // Open webmail compose directly in a new tab
+    const newTab = window.open(url, "_blank", "noopener,noreferrer");
+
+    if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
       setStatus({
-        message: "Triggering your desktop email application...",
+        message: `Browser blocked popup. Click the link below to open ${currentProvider.name} compose tab:`,
+        url,
+        providerName: currentProvider.name,
       });
     } else {
-      // Open webmail compose directly in a new tab
-      const newTab = window.open(url, "_blank", "noopener,noreferrer");
-
-      if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
-        setStatus({
-          message: `Browser blocked popup. Click the link below to open ${currentProvider.name} compose tab:`,
-          url,
-          providerName: currentProvider.name,
-        });
-      } else {
-        setStatus({
-          message: `Opened ${currentProvider.name} in a new tab! If you are not signed in, your email provider will prompt you to log in.`,
-          url,
-          providerName: currentProvider.name,
-        });
-      }
+      setStatus({
+        message: `Opened ${currentProvider.name} in a new tab! If you are not signed in, your email provider will prompt you to log in.`,
+        url,
+        providerName: currentProvider.name,
+      });
     }
   };
 
@@ -195,7 +185,7 @@ export default function Contact() {
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-mono font-semibold tracking-wider uppercase mb-3 border border-emerald-500/20">
-            05 // Get In Touch
+            Get In Touch
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Let&apos;s Build Something Grounded & Resilient.
@@ -324,7 +314,7 @@ export default function Contact() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-600 mb-6">
-                Fill in the details below. A new browser tab will open directly in your chosen email provider with the recipient, subject, and message pre-filled.
+                Fill in the details below. A new browser tab will automatically open in your detected email provider (Gmail, Outlook, Yahoo, Proton, etc.) with the message pre-filled.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -346,9 +336,16 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-600 mb-1.5 font-medium">
-                      Your Email *
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-mono text-slate-600 font-medium">
+                        Your Email *
+                      </label>
+                      {formState.email.includes("@") && (
+                        <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                          Detected: {currentProvider.name}
+                        </span>
+                      )}
+                    </div>
                     <input
                       type="email"
                       required
@@ -391,52 +388,6 @@ export default function Contact() {
                     }
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors resize-none"
                   />
-                </div>
-
-                {/* Multi-Provider Selector */}
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-700">
-                      Choose Your Email Provider:
-                    </span>
-                    <span className="text-[11px] font-mono text-emerald-700 font-medium">
-                      Auto-detects from your email
-                    </span>
-                  </div>
-
-                  {/* Provider Pills Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {PROVIDERS.map((provider) => {
-                      const isSelected = activeProviderId === provider.id;
-                      return (
-                        <button
-                          key={provider.id}
-                          type="button"
-                          onClick={() => setSelectedProvider(provider.id)}
-                          className={`px-3 py-2 rounded-lg text-xs font-semibold border flex items-center justify-between transition-all ${
-                            isSelected
-                              ? provider.activeColor
-                              : "bg-white text-slate-700 hover:bg-slate-100 border-slate-200"
-                          }`}
-                        >
-                          <span>{provider.name}</span>
-                          <span
-                            className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded ${
-                              isSelected
-                                ? "bg-white/20 text-white"
-                                : "bg-slate-100 text-slate-500"
-                            }`}
-                          >
-                            {provider.badge}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <p className="text-[11px] text-slate-500 leading-tight">
-                    {currentProvider.description}
-                  </p>
                 </div>
 
                 <div className="pt-2 flex flex-col gap-3">
