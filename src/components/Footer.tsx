@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="py-12 border-t border-slate-200 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          
+
           {/* Left: Monogram & Bio Note */}
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-500/30 flex items-center justify-center text-emerald-700 font-mono text-xs font-bold">
@@ -74,7 +74,7 @@ export default function Footer() {
 
         {/* Bottom micro notice */}
         <div className="mt-8 pt-4 border-t border-slate-100 text-center text-[10px] font-mono text-slate-400">
-          Built with Next.js 16, TypeScript, Tailwind CSS & Framer Motion. Zero-config Vercel deployment.
+          Built with Next.js 16, TypeScript, Tailwind CSS & Framer Motion.
         </div>
       </div>
     </footer>
